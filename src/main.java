@@ -1,33 +1,42 @@
-import java.util.Collections;
-import java.util.ArrayList;
-import java.util.HashMap;
-import android.os.Handler
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 
-import dev.groupx.minigames.alphabet.Alphabet.updateTimerReference;
 public class main {
 
 	/**
 	 * @param args
 	 */
 	static Integer[][] sudoku;
-	
-	// Declaring a new handler to update the timer
-	public Handler mHandler = new Handler();
-	//Refresh every second
-		private final int REFRESH_RATE = 10;
-		//Declare string for the timer
-		doWork workThread = new doWork();
-		
-	public static void main(String[] args) {
+
+
+	public static void main(String[] args) throws FileNotFoundException {
 		// TODO Auto-generated method stub
-		
+
+
+
 		sudoku = new Integer[9][9];
+
+		//Scans from the system.in
+		File fin = new File("skyline.txt");
 		
-		for ( int i = 0; i < 9; i ++ ){
-			for ( int j = 0; j < 9; j ++ ){
-				sudoku[i][j] = 0; 
+		Scanner scanIn = new Scanner(fin);
+		//declare a scanner to read from system.in
+
+		int numCases = 0;
+		
+		numCases = scanIn.nextInt();
+
+		//Declares a instance of puzzle
+		sudoku = new Integer[9][9];
+
+		//Scanning in the inital eight puzzle
+		for ( int i = 0; i < 9; i++ ){
+			for ( int j = 0; j<9; j++){
+				sudoku[i][j] = scanIn.nextInt();
 			}
 		}
+
 		/*
 		Integer[][] sudoku = {{3, 0, 6, 5, 0, 8, 4, 0, 0},
                 {5, 2, 0, 0, 0, 0, 0, 0, 0},
@@ -38,29 +47,15 @@ public class main {
                 {1, 3, 0, 0, 0, 0, 2, 5, 0},
                 {0, 0, 0, 0, 0, 0, 0, 7, 4},
                 {0, 0, 5, 2, 0, 6, 3, 0, 0}};
-		*/
-		
-		// We start the clock
-		mHandler.postDelayed(clockTimer, REFRESH_RATE);
-		
+		 */
+
+		Solver s = new Solver();
+
+		s.printArray(sudoku);
+		s.solve(sudoku,0,0);
+
 	}
 	
-	class doWork implements Runnable {
-
-		
-		
-		public void run(){
-
-			Solver s = new Solver();
-			
-			s.printArray(sudoku);
-			s.solve(sudoku,0,0);
-			
-		}
-
-	}
-
-
 }
 
 

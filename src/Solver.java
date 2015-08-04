@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
 
-import javax.swing.RowFilter;
-
 public class Solver {
 
 
@@ -46,7 +44,7 @@ public class Solver {
 						nextCol = startCol + 1;
 					}
 
-					//printArray(currentPosition);
+					printArray(currentPosition);
 
 					if (solve(currentPosition, nextRow, nextCol))
 						return true;
